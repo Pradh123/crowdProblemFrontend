@@ -19,7 +19,7 @@
   "framework": "vite",
   "outputDirectory": "dist",
   "functions": {
-    "api/server.js": {
+    "app.js": {
       "maxDuration": 30 
     }
   }
