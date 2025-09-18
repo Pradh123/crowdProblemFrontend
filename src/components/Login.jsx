@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
+import { toast } from 'react-toastify';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -18,6 +19,7 @@ function Login() {
     try {
       const response = await api.post('/auth/login', formData);
       login(response.data.token);
+      toast.success("Login successfully")
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');

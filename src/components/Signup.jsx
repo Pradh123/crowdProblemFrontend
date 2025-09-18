@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
+import { toast } from 'react-toastify';
 
 function Signup() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -17,10 +18,12 @@ function Signup() {
     e.preventDefault();
     try {
       const response = await api.post('/auth/signup', formData);
+      toast.success("signup successfully")
       login(response.data.token);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');
+      
     }
   };
 

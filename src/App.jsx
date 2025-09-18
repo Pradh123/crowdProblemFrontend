@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import AdminPage from './pages/AdminPage';
 import Profile from './pages/Profile';
 import ProblemDetail from './pages/ProblemDetail';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css'
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
           <Route path="/problems/:id" element={<ProblemDetail />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </AuthProvider>
   );
 }

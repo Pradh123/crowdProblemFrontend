@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../services/api';
+import { toast } from 'react-toastify';
 
 function SolutionForm({ problemId, onSubmit }) {
   const [text, setText] = useState('');
@@ -10,9 +11,11 @@ function SolutionForm({ problemId, onSubmit }) {
     try {
       await api.post(`/solutions/${problemId}`, { text });
       setText('');
+      toast.success("solution post successfully")
       onSubmit();
     } catch (err) {
-      setError('Failed to post solution');
+      toast.error('Failed to post solution')
+      
     }
   };
 

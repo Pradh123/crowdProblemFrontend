@@ -4,6 +4,7 @@ import api from '../services/api.js';
 import SolutionList from '../components/SolutionList.jsx';
 import SolutionForm from '../components/SolutionForm.jsx';
 import ProblemForm from '../components/ProblemForm.jsx';
+import { toast } from 'react-toastify';
 
 function ProblemDetail() {
   const { id } = useParams();
@@ -27,18 +28,10 @@ function ProblemDetail() {
     try {
       await api.post(`/problems/${id}/${type}`);
       const response = await api.get(`/problems/${id}`);
+      toast.success("clicked")
       setProblem(response.data);
     } catch (err) {
-      console.error('Failed to vote');
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await api.delete(`/problems/${id}`);
-      navigate('/dashboard'); // Redirect to dashboard after deletion
-    } catch (err) {
-      console.error('Failed to delete');
+      toast.error("something went wrong")
     }
   };
 
@@ -47,9 +40,11 @@ function ProblemDetail() {
       await api.put(`/problems/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
       setEditing(false);
       const response = await api.get(`/problems/${id}`);
+      toast.success("updated")
       setProblem(response.data);
     } catch (err) {
-      console.error('Failed to update');
+      
+      toast.error("Failed to update")
     }
   };
 

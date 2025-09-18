@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import Pagination from './Pagination';
+import { toast } from 'react-toastify';
 
 function AdminPanel() {
   const [users, setUsers] = useState([]);
@@ -39,9 +40,11 @@ function AdminPanel() {
       await api.delete(`/admin/problems/${problemId}`);
       // Refresh problems
       const res = await api.get('/problems');
+      toast.success("Problem deleted successfully")
       setProblems(res.data);
     } catch (err) {
       console.error('Failed to delete problem');
+        toast.error("Failed to delete problem")
     }
   };
 
